@@ -32,4 +32,7 @@ def my_convert_to_date(x, default=None):
                             try:
                                 return datetime.strptime(x, "%d.%m.%y")
                             except:
-                                return default
+                                try:
+                                    return datetime.strptime(x, "%d-%m-%Y %H:%M:%S")
+                                except:
+                                    return default
