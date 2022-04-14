@@ -11,23 +11,25 @@ def my_convert_to_number(x, default=None):
 
 def my_convert_to_date(x, default=None):
     """ converts input to a datetime object """
-
-    try:
-        return datetime.strptime(x, "%d-%m-%Y")
-    except:
+    if isinstance(x, datetime):
+        return x
+    else:
         try:
-            return datetime.strptime(x, "%d/%m/%Y")
+            return datetime.strptime(x, "%d-%m-%Y")
         except:
             try:
-                return datetime.strptime(x, "%d.%m.%Y")
+                return datetime.strptime(x, "%d/%m/%Y")
             except:
                 try:
-                    return datetime.strptime(x, "%d-%m-%y")
+                    return datetime.strptime(x, "%d.%m.%Y")
                 except:
                     try:
-                        return datetime.strptime(x, "%d/%m/%y")
+                        return datetime.strptime(x, "%d-%m-%y")
                     except:
                         try:
-                            return datetime.strptime(x, "%d.%m.%y")
+                            return datetime.strptime(x, "%d/%m/%y")
                         except:
-                            return default
+                            try:
+                                return datetime.strptime(x, "%d.%m.%y")
+                            except:
+                                return default
